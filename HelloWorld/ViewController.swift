@@ -9,17 +9,51 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var formalitySwitch: UISwitch!
+    @IBAction func changeLabel(_ sender: UIButton) {
+        
+//        let name = nameTextField.text
+//        nameLabel.text = "My name is..." + name!
+        
+        if (formalitySwitch.isOn) {
+            nameLabel.text = "Greetings, \(nameTextField.text!)"
+        } else {
+            let firstName = nameTextField.text?.components(separatedBy: " ")[0]
+            
+            nameLabel.text = "What's up \(firstName ?? "")?"
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBOutlet weak var redSlider: UISlider!
+    @IBOutlet weak var greenSlider: UISlider!
+    @IBOutlet weak var blueSlider: UISlider!
+    
+    @IBOutlet weak var changeAlpha: UISlider!
+    
+    
+    
+    
+    @IBAction func switchFormality(_ sender: UISwitch) {
+       switchLabelFormality(formalitySwitchInFunction: formalitySwitch)
+        
     }
-
+    
+    func switchLabelFormality(formalitySwitchInFunction: UISwitch) {
+        if (formalitySwitchInFunction.isOn) {
+            nameLabel.text = "Greetings \(nameTextField.text!)"
+            
+        } else {
+            let firstName = nameTextField.text?.components(separatedBy: " ")[0]
+            
+            nameLabel.text = "What's up \(firstName ?? "")?"
+        }
+    }
+    @IBAction func changeColor(_ sender: UISlider) {
+        self.view.backgroundColor = UIColor(red: CGFloat(redSlider.value)/255, green: CGFloat(greenSlider.value)/255, blue: CGFloat(blueSlider.value)/255, alpha: CGFloat(changeAlpha.value))
+    }
+    
+    
 
 }
 
